@@ -1,0 +1,41 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "name": "DesktopApp: Main",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/packages/desktop-app",
+            "runtimeExecutable": "${workspaceFolder}/packages/desktop-app/node_modules/.bin/electron",
+            "runtimeArgs": [
+                "--remote-debugging-port=9223"
+            ],
+            "args": ["."],
+            "outputCapture": "std",
+            "sourceMaps": true,
+            "resolveSourceMapLocations": [
+                "${workspaceFolder}/packages/desktop-app/**",
+                "!**/node_modules/**"
+            ],
+            "preLaunchTask": "desktop-app:build"
+        },
+        {
+            "name": "DesktopApp: Renderer",
+            "type": "chrome",
+            "request": "attach",
+            "port": 9223,
+            "webRoot": "${workspaceFolder}/packages/desktop-app",
+            "timeout": 30000
+        }
+    ],
+    "compounds": [
+        {
+            "name": "DesktopApp: All",
+            "configurations": [
+                "DesktopApp: Main",
+                "DesktopApp: Renderer"
+            ]
+        }
+    ]
+}
